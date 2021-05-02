@@ -7,3 +7,10 @@ a {
     text-decoration: none;
     color: black;
 }
+
+/* box-sizing has a default in all browsers 
+*  below can resolve extra padding with inputs
+*/
+* {
+    box-sizing: border-box;
+}
