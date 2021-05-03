@@ -11,6 +11,41 @@ const config = {
     measurementId: "G-95EV711X8S"
 };
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    /**
+     * Create a user reference in the firestore collection if
+     * it does not exist otherwise return the userRefs
+     */
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+
+    if(!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        } catch (error) {
+            console.log('error creating user', error.message);
+        }
+    }
+
+    return userRef;
+}
+
+/**
+ * DocumentReference vs CollectionReference
+ * perform CRUD Methods (create, retrieve, update, delete)
+ * .set(), .get(), .update(), .delete()
+ */
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
