@@ -47,6 +47,7 @@ class SignUp extends React.Component {
     handleChange = event => {
         const { name, value } = event.target;
         
+        // Syntax for assigning a dynamically changing key parameter
         this.setState({ [name]: value });
     }
 
