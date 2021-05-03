@@ -16,7 +16,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     /**
      * Create a user reference in the firestore collection if
-     * it does not exist otherwise return the userRefs
+     * it does not exist otherwise return the userRef
      */
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
