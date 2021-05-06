@@ -51,6 +51,11 @@ class App extends React.Component {
   }
 }
 
+/**
+ * mapStateToProps: a subscription to the store, any time store is updated, 
+ * mapStateToProps is called: ie '{ user }' is destructured off of the state and
+ * updates our 'currentUser' property on app component
+ */
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 });
