@@ -52,6 +52,11 @@ class App extends React.Component {
 }
 
 /**
+ * Redux pattern below for connect, mapStateToProps, and mapDispatchToProps
+ * https://react-redux.js.org/api/connect
+ */
+
+/**
  * mapStateToProps: a subscription to the store, any time store is updated, 
  * mapStateToProps is called: ie '{ user }' is destructured off of the state and
  * updates our 'currentUser' property on app component
@@ -60,8 +65,12 @@ const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+/**
+ * mapDispatchToProps: declared as a function taking two parameters, dispatch and ownProps
+ * mapDispatchToProps is called, passing dispatch
+ */
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user))
 });
 
 export default connect(
