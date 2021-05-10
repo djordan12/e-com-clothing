@@ -7,8 +7,12 @@ import CartItem from '../cart-item/cart-item.component';
 
 import './cart-dropdown.styles.scss';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-const CartDropdown = ({ cartItems, history }) => (
+/**
+ * Utilizing a different implementation of dispatch here
+ */
+const CartDropdown = ({ cartItems, history, dispatch }) => (
     <div className='cart-dropdown'>
         <div className='cart-items'>
             {
@@ -17,7 +21,10 @@ const CartDropdown = ({ cartItems, history }) => (
                 <span className='empty-message'>Your cart is empty</span>
             }
         </div>
-        <CustomButton onClick={() => history.push('/checkout')}>Go To Checkout</CustomButton>
+        <CustomButton onClick={() => {
+            history.push('/checkout');
+            dispatch(toggleCartHidden());
+        }}>Go To Checkout</CustomButton>
     </div>
 )
 
