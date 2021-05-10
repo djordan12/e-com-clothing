@@ -60,6 +60,9 @@ class App extends React.Component {
  * mapStateToProps: a subscription to the store, any time store is updated, 
  * mapStateToProps is called: ie '{ user }' is destructured off of the state and
  * updates our 'currentUser' property on app component
+ * 
+ * Has a shallow equality check for every value in the object; it won't replace values if they
+ * pass a shallow equality check which means it won't needlessly re-render
  */
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
