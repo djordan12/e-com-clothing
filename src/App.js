@@ -9,17 +9,17 @@ import ShopPage from './pages/shoppage/shoppage.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument , addCollectionAndDocuments} from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
-
+import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 
 class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -33,6 +33,11 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
     });
+
+    /**
+     * Adding shop data programatically, only need to do this once.
+     */
+    //  addCollectionAndDocuments('collections', collectionsArray.map(({ title, items}) => ({ title, items })));
   }
 
   componentWillUnmount() {
@@ -70,7 +75,8 @@ class App extends React.Component {
  * pass a shallow equality check which means it won't needlessly re-render
  */
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview
 });
 
 /**
