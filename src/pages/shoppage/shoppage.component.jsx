@@ -26,11 +26,24 @@ class ShopPage extends React.Component {
         // retrieve the collections from firebase
         const collectionRef = firestore.collection('collections');
 
-        this.unsubscribeFromSnapShot = collectionRef.onSnapshot(async snapShot => {
+        // As a promise
+        collectionRef.get().then(snapShot => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
             updateCollections(collectionsMap);
             this.setState({ loading: false });
         });
+
+        // As an observable
+        // this.unsubscribeFromSnapShot = collectionRef.onSnapshot(async snapShot => {
+        //     const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
+        //     updateCollections(collectionsMap);
+        //     this.setState({ loading: false });
+        // });
+
+        // A fetch, comes back in a much different datastructure than the promise / observable
+        // fetch('https://firestore.googleapis.com/v1/projects/crwn-db-9cbfa/databases/(default)/documents/collections')
+        //     .then(response => response.json())
+        //     .then(collections => console.log(collections))
     }
 
     componentWillUnmount() {
