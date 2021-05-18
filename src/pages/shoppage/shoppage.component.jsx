@@ -47,7 +47,7 @@ class ShopPage extends React.Component {
     }
 
     componentWillUnmount() {
-        this.unsubscribeFromSnapShot();
+        // this.unsubscribeFromSnapShot();
     }
 
     render() {
