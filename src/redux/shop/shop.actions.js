@@ -10,11 +10,16 @@ export const fetchCollectionSuccess = collectionsMap => ({
     payload: collectionsMap
 });
 
-export const fetchCollectionFailure= errorMessage => ({
+export const fetchCollectionFailure = errorMessage => ({
     type: ShopActionTypes.FETCH_COLLECTIONS_FAILURE,
     payload: errorMessage
 });
 
+/**
+ *  Redux Thunk - middleware that is looking for functions prior to passing it to the reducer
+ *  vs an object like the other actions above. Thunk recognizes this function and knows to pass the dispatch
+ *  functionality as a paramater 
+ * */
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         const collectionRef = firestore.collection('collections');
