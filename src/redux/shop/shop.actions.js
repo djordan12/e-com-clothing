@@ -20,14 +20,14 @@ export const fetchCollectionFailure = errorMessage => ({
  *  vs an object like the other actions above. Thunk recognizes this function and knows to pass the dispatch
  *  functionality as a paramater 
  * */
-export const fetchCollectionsStartAsync = () => {
-    return dispatch => {
-        const collectionRef = firestore.collection('collections');
-        dispatch(fetchCollectionsStart());
+// export const fetchCollectionsStartAsync = () => {
+//     return dispatch => {
+//         const collectionRef = firestore.collection('collections');
+//         dispatch(fetchCollectionsStart());
 
-        collectionRef.get().then(snapShot => {
-            const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
-            dispatch(fetchCollectionSuccess(collectionsMap));
-        }).catch(error => dispatch(fetchCollectionFailure(error.message)));
-    }
-}
+//         collectionRef.get().then(snapShot => {
+//             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
+//             dispatch(fetchCollectionSuccess(collectionsMap));
+//         }).catch(error => dispatch(fetchCollectionFailure(error.message)));
+//     }
+// }
