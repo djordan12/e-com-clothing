@@ -9,17 +9,15 @@ import ShopPage from './pages/shoppage/shoppage.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
-import { auth, createUserProfileDocument , addCollectionAndDocuments} from './firebase/firebase.utils';
-import { setCurrentUser } from './redux/user/user.actions';
-import { selectCurrentUser } from './redux/user/user.selectors';
+
 import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 
 class App extends React.Component {
 
-  unsubscribeFromAuth = null;
+  // unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionsArray } = this.props;
+    // const { setCurrentUser, collectionsArray } = this.props;
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
@@ -43,7 +41,7 @@ class App extends React.Component {
 
   componentWillUnmount() {
     //onAuthStateChanged() returns the unsubscribe function for the observer
-    this.unsubscribeFromAuth();
+    // this.unsubscribeFromAuth();
   }
 
   render() {
@@ -76,7 +74,6 @@ class App extends React.Component {
  * pass a shallow equality check which means it won't needlessly re-render
  */
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
   collectionsArray: selectCollectionsForPreview
 });
 
@@ -84,12 +81,12 @@ const mapStateToProps = createStructuredSelector({
  * mapDispatchToProps: declared as a function taking two parameters, dispatch and ownProps
  * mapDispatchToProps is called, passing dispatch
  */
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   setCurrentUser: (user) => dispatch(setCurrentUser(user))
+// });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)
+  null)
   (App);
 
