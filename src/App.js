@@ -7,16 +7,21 @@ import { createStructuredSelector } from 'reselect';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/shoppage.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+
 import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
 
 import { selectCollectionsForPreview } from './redux/shop/shop.selector';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { checkUserSession } from './redux/user/user.actions';
 
 class App extends React.Component {
 
   // unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { checkUserSession } = this.props;
+    checkUserSession();
     // const { setCurrentUser, collectionsArray } = this.props;
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
@@ -65,28 +70,16 @@ class App extends React.Component {
  * https://react-redux.js.org/api/connect
  */
 
-/**
- * mapStateToProps: a subscription to the store, any time store is updated, 
- * mapStateToProps is called: ie '{ user }' is destructured off of the state and
- * updates our 'currentUser' property on app component
- * 
- * Has a shallow equality check for every value in the object; it won't replace values if they
- * pass a shallow equality check which means it won't needlessly re-render
- */
 const mapStateToProps = createStructuredSelector({
-  collectionsArray: selectCollectionsForPreview
+  currentUser: selectCurrentUser
 });
 
-/**
- * mapDispatchToProps: declared as a function taking two parameters, dispatch and ownProps
- * mapDispatchToProps is called, passing dispatch
- */
-// const mapDispatchToProps = (dispatch) => ({
-//   setCurrentUser: (user) => dispatch(setCurrentUser(user))
-// });
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession())
+});
 
 export default connect(
   mapStateToProps,
-  null)
+  mapDispatchToProps)
   (App);
 

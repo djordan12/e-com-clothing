@@ -15,11 +15,15 @@ export const emailSignInStart = (emailAndPassword) => ({
 });
 
 export const signInSuccess = user => ({
-    type: UserActionTypes.EMAIL_SIGN_IN_SUCCESS,
+    type: UserActionTypes.SIGN_IN_SUCCESS,
     payload: user
 });
 
 export const signInFailure = error => ({
-    type: UserActionTypes.emailSignInFailure,
+    type: UserActionTypes.SIGN_IN_FAILURE,
     payload: error
 });
+
+export const checkUserSession = () => ({
+    type: UserActionTypes.CHECK_USER_SESSION
+})
