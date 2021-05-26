@@ -8,11 +8,6 @@ import { signUpStart } from '../../redux/user/user.actions';
 
 import './sign-up.styles.scss';
 
-
-/**
- * Modify this component by using a redux saga vs the component signing up a user and additionally
- * having it log them in after it has signed them up.
- */
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -43,21 +38,6 @@ class SignUp extends React.Component {
             password: '',
             confirmPassword: ''
         });
-
-        // try {
-        //     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-        //     await createUserProfileDocument(user, { displayName });
-
-        //     this.setState({
-        //         displayName: '',
-        //         email: '',
-        //         password: '',
-        //         confirmPassword: ''
-        //     });
-
-        // } catch (error) {
-        //     console.error(error);
-        // }
     }
 
     handleChange = event => {
